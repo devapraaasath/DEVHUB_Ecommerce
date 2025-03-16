@@ -8,11 +8,12 @@ load_dotenv()
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Security settings
-SECRET_KEY = os.getenv("SECRET_KEY", "your-secret-key")
+SECRET_KEY = os.getenv("SECRET_KEY", "23112003")
 DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,devhubecommerce-production.up.railway.app").split(",")
 
-CSRF_TRUSTED_ORIGINS = [ 'devhubecommerce-production.up.railway.app']
+CSRF_TRUSTED_ORIGINS = ['https://devhubecommerce-production.up.railway.app']
+
 
 # Installed apps
 INSTALLED_APPS = [
@@ -65,7 +66,7 @@ pymysql.install_as_MySQLdb()
 # Database settings
 DATABASES = {
     "default": {
-        "ENGINE": "mysql.connector.django",  # Change this line
+       "ENGINE": "django.db.backends.mysql",  # Change this line
         "NAME": os.getenv("DB_NAME", "railway"),
         "USER": os.getenv("DB_USER", "root"),
         "PASSWORD": os.getenv("DB_PASSWORD", ""),
