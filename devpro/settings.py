@@ -2,7 +2,6 @@ import dj_database_url
 import os
 from pathlib import Path
 import pymysql
-load_dotenv()
 
 from dotenv import load_dotenv
 load_dotenv()
