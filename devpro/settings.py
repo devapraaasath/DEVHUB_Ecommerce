@@ -12,9 +12,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # Security settings
 SECRET_KEY = os.getenv("SECRET_KEY", "23112003")
 DEBUG = os.getenv("DEBUG", "False") == "True"
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "localhost,devhubecommerce-production.up.railway.app").split(",")
-
-CSRF_TRUSTED_ORIGINS = ['https://devhubecommerce-production.up.railway.app']
+ALLOWED_HOSTS = ["0.0.0.0", "localhost", "devhubecommerce-production.up.railway.app"]
+CSRF_TRUSTED_ORIGINS = ["https://devhubecommerce-production.up.railway.app"]
 
 
 # Installed apps
