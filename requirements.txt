@@ -3,4 +3,5 @@ gunicorn
 psycopg2-binary
 whitenoise
 Django
-mysqlclient==2.1.1
+mysql-connector-python
+

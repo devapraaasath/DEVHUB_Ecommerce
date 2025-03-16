@@ -65,14 +65,15 @@ pymysql.install_as_MySQLdb()
 # Database settings
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.mysql",
+        "ENGINE": "mysql.connector.django",  # Change this line
         "NAME": os.getenv("DB_NAME", "railway"),
         "USER": os.getenv("DB_USER", "root"),
         "PASSWORD": os.getenv("DB_PASSWORD", ""),
-        "HOST": os.getenv("DB_HOST", "containers-us-west-XXX.railway.app"),  # Replace with actual host
+        "HOST": os.getenv("DB_HOST", "containers-us-west-XXX.railway.app"),
         "PORT": os.getenv("DB_PORT", "3306"),
     }
 }
+
 
 # Use dj-database-url if DATABASE_URL is provided
 DATABASE_URL = os.getenv("DATABASE_URL")
