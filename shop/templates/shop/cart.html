@@ -1,0 +1,166 @@
+{% extends 'shop/layout/main.html' %}
+{% block title %}shopy | Cart{% endblock title %}
+
+{% block script %}
+<div class="cart-container">
+  <h2>Your Cart</h2>
+  <div class="cart-grid">
+    {% for item in cart %}
+ 
+      <div class="cart-item">
+        <a href="{% url 'product_details' item.Product.category.name item.Product.name %}">
+        <img src="{{ item.Product.product_image.url }}" class="product-image" alt="Product">
+        </a>
+        <div class="cart-details">
+          <h3>{{ item.Product.name }}</h3>
+          <p class="price">₹{{ item.Product.selling_price | stringformat:'d' }}</p>
+          <div class="quantity-control">
+            <button class="qty-btn">Quantity :</button>
+            <span class="qty">{{ item.product_qty }}</span>
+          </div>
+          <p class="amt">₹{{ item.total_cost | stringformat:'d' }}</p>
+          <a href="{% url 'remove_cart' item.id %}" onclick="return confirm('Are you sure to remove?')" class="remove-btn">Remove</a>
+        </div>
+      </div>
+     
+    {% endfor %}
+  </div>
+  <div class="total-section" id="net">Total Cost: ₹0</div>
+  <button class="checkout-btn">Proceed to Checkout</button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const amounts = document.querySelectorAll(".amt");
+    const total = Array.from(amounts).reduce((acc, el) => acc + Number(el.textContent.replace('₹', '')), 0);
+    document.getElementById("net").innerHTML = "Total Cost: ₹" + total;
+  });
+</script>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+  }
+
+  .cart-container {
+    max-width: 900px;
+    margin: 80px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  h2 {
+    text-align: center;
+    color: #222;
+  }
+
+  .cart-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 20px;
+  }
+
+  .cart-item {
+    display: flex;
+    align-items: center;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .cart-item:hover {
+    transform: scale(1.02);
+  }
+
+  .product-image {
+    width: 120px;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 15px;
+  }
+
+  .cart-details h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+  }
+
+  .price, .amt {
+    color: #d9534f;
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 10px 0;
+  }
+
+  .qty-btn {
+    background: #0275d8;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+
+  .qty {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .remove-btn {
+    display: inline-block;
+    background: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    width: 120px;
+    text-align: center;
+  }
+
+  .remove-btn:hover {
+    background: #c82333;
+  }
+
+  .total-section {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 20px;
+  }
+
+  .checkout-btn {
+    width: 100%;
+    padding: 15px;
+    background: #28a745;
+    color: white;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    position: sticky;
+    bottom: 10px;
+  }
+
+  @media (max-width: 768px) {
+    .cart-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+{% endblock script %}
