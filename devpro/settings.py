@@ -2,6 +2,7 @@ import dj_database_url
 import os
 from pathlib import Path
 from dotenv import load_dotenv  # Import dotenv
+import pymysql
 load_dotenv()
 # Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -60,6 +61,7 @@ TEMPLATES = [
 # WSGI application
 WSGI_APPLICATION = "devpro.wsgi.application"
 
+pymysql.install_as_MySQLdb()  
 # Database settings
 DATABASES = {
     "default": {
